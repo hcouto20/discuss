@@ -3,6 +3,7 @@
 <ul class="collection">
   <%= for topic <- @topics do %>
     <li class="collection-item">
+
       <%= topic.id %>
 
         <i class="material-icons">_</i>
@@ -10,9 +11,15 @@
       <%= topic.title %>
 
       <div class="right">
-        <%= link "Editar", to: topic_path(@conn, :edit, topic) %>
 
-        <%= link "Excluir", to: topic_path(@conn, :delete, topic), method: :delete %>
+      <%= link to: topic_path(@conn, :edit, topic), class: "material-icons" do %>
+        edit
+       <% end %>
+
+       <%= link to: topic_path(@conn, :delete, topic), class: "material-icons", method: :delete do %>
+        delete
+       <% end %>
+
       </div>
     </li>
   <% end %>
