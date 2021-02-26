@@ -1,8 +1,12 @@
-<h5>Topics</h5>
+<h5>Tópicos</h5>
 
 <ul class="collection">
   <%= for topic <- @topics do %>
     <li class="collection-item">
+      <%= topic.id %>
+
+        <i class="material-icons">_</i>
+
       <%= topic.title %>
 
       <div class="right">
