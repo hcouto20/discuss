@@ -6,7 +6,10 @@ defmodule Discuss.Router do
     plug(:fetch_session)
     plug(:fetch_flash)
     plug(:protect_from_forgery)
+    # Plug de função
     plug(:put_secure_browser_headers)
+    # Plug de modulo
+    plug(Discuss.Plugs.SetUser)
   end
 
   pipeline :api do
@@ -25,7 +28,7 @@ defmodule Discuss.Router do
 
     get("/:provider", AuthController, :request)
     get("/:provider/callback", AuthController, :callback)
-   end
+  end
 
   # Other scopes may use custom stacks.
   # scope "/api", Discuss do
