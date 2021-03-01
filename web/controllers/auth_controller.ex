@@ -3,11 +3,13 @@ defmodule Discuss.AuthController do
 
   plug(Ueberauth)
 
-  def callback(conn, params) do
-    IO.puts("+++++++++")
-    IO.inspect(conn.assigns)
-    IO.puts("+++++++++")
-    IO.inspect(params)
-    IO.puts("+++++++++")
+  def callback(%{assigns: %{ueberauth_auth: auth}} = conn, params) do
+    user_params = %{
+      token: auth.credentials.token,
+      email: auth.info.email,
+      provider: auth.state.provider
+    }
+
+    IO.inspect(user_params)
   end
 end
