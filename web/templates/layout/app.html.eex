@@ -24,13 +24,15 @@
             <li>
               <b>
                 <a>
-                  Logout
+                  <%= link "Sair", to: auth_path(@conn, :signout) %>
                 </a>
               </b>
             </li>
           <% else %>
             <li>
-              <%= link "Entrar com GitHub", to: auth_path(@conn, :request, "github") %>
+              <b>
+                <%= link "Entrar com GitHub", to: auth_path(@conn, :request, "github") %>
+              </b>
             </li>
           <% end %>
         </ul>
