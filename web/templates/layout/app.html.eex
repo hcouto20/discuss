@@ -31,7 +31,7 @@
           <% else %>
             <li>
               <b>
-                <%= link "Entrar com GitHub", to: auth_path(@conn, :request, "github") %>
+              <%= link "Entrar com GitHub", to: auth_path(@conn, :request, "github") %>
               </b>
             </li>
           <% end %>

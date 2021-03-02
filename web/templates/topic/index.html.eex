@@ -4,10 +4,6 @@
   <%= for topic <- @topics do %>
     <li class="collection-item">
 
-      <%= topic.id %>
-
-        <i class="material-icons">_</i>
-
       <%= topic.title %>
 
       <div class="right">

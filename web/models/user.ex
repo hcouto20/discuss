@@ -1,6 +1,8 @@
 defmodule Discuss.User do
   use Discuss.Web, :model
 
+  @primary_key {:id, Ecto.UUID, autogenerate: true}
+
   schema "users" do
     field(:email, :string)
     field(:provider, :string)
