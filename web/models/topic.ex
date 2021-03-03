@@ -1,10 +1,9 @@
 defmodule Discuss.Topic do
   use Discuss.Web, :model
 
-  @primary_key {:id, Ecto.UUID, autogenerate: true}
-
   schema "topics" do
     field(:title, :string)
+    belongs_to(:user, Discuss.User)
   end
 
   def changeset(struct, params \\ %{}) do
