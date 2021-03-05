@@ -31,7 +31,7 @@ defmodule Discuss.TopicController do
     case Repo.insert(changeset) do
       {:ok, _topic} ->
         conn
-        |> put_flash(:info, "Topic Created")
+        |> put_flash(:info, "Tópico criado com sucesso!")
         |> redirect(to: topic_path(conn, :index))
 
       {:error, changeset} ->
@@ -53,7 +53,7 @@ defmodule Discuss.TopicController do
     case Repo.update(changeset) do
       {:ok, _topic} ->
         conn
-        |> put_flash(:info, "Topic Updated")
+        |> put_flash(:info, "Tópico atualizado com sucesso!")
         |> redirect(to: topic_path(conn, :index))
 
       {:error, changeset} ->
@@ -65,7 +65,7 @@ defmodule Discuss.TopicController do
     Repo.get!(Topic, topic_id) |> Repo.delete!()
 
     conn
-    |> put_flash(:info, "Topic Deleted")
+    |> put_flash(:info, "Tópico apagado com sucesso!")
     |> redirect(to: topic_path(conn, :index))
   end
 
@@ -76,7 +76,7 @@ defmodule Discuss.TopicController do
       conn
     else
       conn
-      |> put_flash(:error, "You cannot edit that")
+      |> put_flash(:error, "Você precisa fazer login primeiro.")
       |> redirect(to: topic_path(conn, :index))
       |> halt()
     end

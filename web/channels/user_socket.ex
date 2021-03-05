@@ -1,13 +1,17 @@
 defmodule Discuss.UserSocket do
   use Phoenix.Socket
 
-  channel("comments:*", Discuss.CommentsChannel)
-  # no controlador -> get("/comments/:id", CommentController, :join, :handle_in)
+  channel "comments:*", Discuss.CommentsChannel
 
-  transport(:websocket, Phoenix.Transports.WebSocket)
+  transport :websocket, Phoenix.Transports.WebSocket
 
-  def connect(_params, socket) do
-
+  def connect(%{"token" => token}, socket) do
+    case Phoenix.Token.verify(socket, "key", token) do
+      {:ok, user_id} ->
+        {:ok, assign(socket, :user_id, user_id)}
+      {:error, _error} ->
+        :error
+    end
   end
 
   def id(_socket), do: nil

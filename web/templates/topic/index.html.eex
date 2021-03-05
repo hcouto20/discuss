@@ -7,7 +7,7 @@
 
       <%= if @conn.assigns.user.id == topic.user_id do %>
         <div class="right">
-         <%= link to: topic_path(@conn, :edit, topic), class: "material-icons" do %>edit<% end %>
+          <%= link to: topic_path(@conn, :edit, topic), class: "material-icons" do %>edit<% end %>
 
           <%= link to: topic_path(@conn, :delete, topic), class: "material-icons", method: :delete do %>delete<% end %>
         </div>
