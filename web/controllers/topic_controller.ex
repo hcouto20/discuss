@@ -7,15 +7,12 @@ defmodule Discuss.TopicController do
   plug(:check_topic_owner when action in [:update, :edit, :delete])
 
   def index(conn, _params) do
-    # IO.inspect(conn.assigns)
-
     topics = Repo.all(Topic)
     render(conn, "index.html", topics: topics)
   end
 
   def show(conn, %{"id" => topic_id}) do
     topic = Repo.get!(Topic, topic_id)
-
     render(conn, "show.html", topic: topic)
   end
 
@@ -26,18 +23,15 @@ defmodule Discuss.TopicController do
   end
 
   def create(conn, %{"topic" => topic}) do
-    # conn.assigns[:user]
-    # conn.assigns.user
-
     changeset =
-      conn.assigns[:user]
+      conn.assigns.user
       |> build_assoc(:topics)
       |> Topic.changeset(topic)
 
     case Repo.insert(changeset) do
       {:ok, _topic} ->
         conn
-        |> put_flash(:info, "Tópico criado com sucesso!")
+        |> put_flash(:info, "Topic Created")
         |> redirect(to: topic_path(conn, :index))
 
       {:error, changeset} ->
@@ -59,7 +53,7 @@ defmodule Discuss.TopicController do
     case Repo.update(changeset) do
       {:ok, _topic} ->
         conn
-        |> put_flash(:info, "Tópico atualizado com sucesso!")
+        |> put_flash(:info, "Topic Updated")
         |> redirect(to: topic_path(conn, :index))
 
       {:error, changeset} ->
@@ -71,7 +65,7 @@ defmodule Discuss.TopicController do
     Repo.get!(Topic, topic_id) |> Repo.delete!()
 
     conn
-    |> put_flash(:info, "Tópico apagado com sucesso!")
+    |> put_flash(:info, "Topic Deleted")
     |> redirect(to: topic_path(conn, :index))
   end
 
@@ -82,7 +76,7 @@ defmodule Discuss.TopicController do
       conn
     else
       conn
-      |> put_flash(:error, "Você não pode fazer esta alteração!")
+      |> put_flash(:error, "You cannot edit that")
       |> redirect(to: topic_path(conn, :index))
       |> halt()
     end
