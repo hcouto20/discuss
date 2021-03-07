@@ -1497,12 +1497,11 @@ socket.connect();
 var createSocket = function createSocket(topicId) {
   var channel = socket.channel('comments:' + topicId, {});
   channel.join().receive('ok', function (resp) {
-    console.log(resp);
-    renderComments(resp.comments);
+    console.log(resp);renderComments(resp.comments);
   }).receive('error', function (resp) {
     console.log('Unable to join', resp);
   });
-
+  /*Ouvinte do canal que vem do broadcast em comments_channel*/
   channel.on('comments:' + topicId + ':new', renderComment);
 
   document.querySelector('button').addEventListener('click', function () {
@@ -1511,7 +1510,7 @@ var createSocket = function createSocket(topicId) {
     channel.push('comment:add', { content: content });
   });
 };
-
+/*Usada para rendenrizar uma lista de comentários */
 function renderComments(comments) {
   var renderedComments = comments.map(function (comment) {
     return commentTemplate(comment);
@@ -1519,19 +1518,19 @@ function renderComments(comments) {
 
   document.querySelector('.collection').innerHTML = renderedComments.join('');
 }
-
+/*Renderiza um único comentário enviado por último e adiciona a lista existente aqui,
+passando um evento de comentário*/
 function renderComment(event) {
   var renderedComment = commentTemplate(event.comment);
 
   document.querySelector('.collection').innerHTML += renderedComment;
 }
-
+/*Modelo de comentário com um comentário, recebendo de volta o tópico renderizado*/
 function commentTemplate(comment) {
   var email = 'Anonymous';
   if (comment.user) {
     email = comment.user.email;
   }
-
   return '\n    <li class="collection-item">\n      ' + comment.content + '\n      <div class="secondary-content">\n        ' + email + '\n      </div>\n    </li>\n  ';
 }
 
