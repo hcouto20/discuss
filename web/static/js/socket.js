@@ -12,7 +12,7 @@ const createSocket = topicId => {
     .receive('error', resp => {
       console.log('Unable to join', resp);
     });
-  /*Ouvinte do canal que vem do broadcast em comments_channel*/
+  /*Ouvinte do canal que vem do broadcast em comments_channel*/ 
   channel.on(`comments:${topicId}:new`, renderComment);
 
   document.querySelector('button').addEventListener('click', () => {
@@ -36,9 +36,9 @@ function renderComment(event) {
 
   document.querySelector('.collection').innerHTML += renderedComment;
 }
-/*Modelo de comentário com um comentário, recebendo de volta o tópico renderizado*/
+/*Modelo de comentário com um comentário, recebendo de volta o tópico renderizado e imprime na tela*/
 function commentTemplate(comment) {
-  let email = 'Anonymous';
+  let email = 'Anônimo';
   if (comment.user) {
     email = comment.user.email;
   }
