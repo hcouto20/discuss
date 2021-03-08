@@ -1525,9 +1525,9 @@ function renderComment(event) {
 
   document.querySelector('.collection').innerHTML += renderedComment;
 }
-/*Modelo de comentário com um comentário, recebendo de volta o tópico renderizado*/
+/*Modelo de comentário com um comentário, recebendo de volta o tópico renderizado e imprime na tela*/
 function commentTemplate(comment) {
-  var email = 'Anonymous';
+  var email = 'Anônimo';
   if (comment.user) {
     email = comment.user.email;
   }
